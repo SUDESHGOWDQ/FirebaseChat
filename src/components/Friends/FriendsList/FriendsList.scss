@@ -1,0 +1,229 @@
+.friends-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.friends-list-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #8e8e8e;
+
+  .loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #efefef;
+    border-top: 3px solid #833ab4;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+.friends-list-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #8e8e8e;
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #262626;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
+}
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #efefef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #833ab4;
+    box-shadow: 0 4px 16px rgba(131, 58, 180, 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+.friend-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.friend-avatar-container {
+  position: relative;
+}
+
+.friend-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.friend-avatar-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #6c757d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 12px;
+  
+  &.online {
+    color: #4caf50;
+  }
+  
+  &.offline {
+    color: #8e8e8e;
+  }
+}
+
+.friend-details {
+  flex: 1;
+  
+  h4 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #262626;
+  }
+  
+  .friend-email {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: #8e8e8e;
+  }
+  
+  .status-text {
+    font-size: 12px;
+    
+    &.online {
+      color: #4caf50;
+      font-weight: 500;
+    }
+    
+    &.offline {
+      color: #c7c7c7;
+    }
+  }
+}
+
+.friend-actions {
+  .chat-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(45deg, #833ab4, #fd1d1d);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(131, 58, 180, 0.4);
+    }
+    
+    span {
+      white-space: nowrap;
+    }
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .friend-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .friend-info {
+    width: 100%;
+  }
+
+  .friend-actions {
+    width: 100%;
+    
+    .chat-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .friend-info {
+    gap: 12px;
+  }
+
+  .friend-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .friend-details h4 {
+    font-size: 15px;
+  }
+
+  .friend-details .friend-email {
+    font-size: 13px;
+  }
+
+  .friend-actions .chat-btn {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+}

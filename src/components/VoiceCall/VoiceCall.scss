@@ -1,0 +1,422 @@
+.voice-call-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, 
+    rgba(26, 35, 126, 0.95) 0%, 
+    rgba(74, 20, 140, 0.95) 100%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.voice-call-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 400px;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    padding: 30px 15px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 20px 10px;
+  }
+}
+
+.caller-avatar {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 40px;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    width: 170px;
+    height: 170px;
+    margin-bottom: 35px;
+  }
+  
+  @media (max-width: 480px) {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 30px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .default-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+    
+    @media (max-width: 768px) {
+      font-size: 3.5rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 3rem;
+    }
+  }
+}
+
+.call-info {
+  margin-bottom: 50px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 40px;
+  }
+  
+  @media (max-width: 480px) {
+    margin-bottom: 35px;
+  }
+
+  .caller-name {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: white;
+    margin: 0 0 15px 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    word-break: break-word;
+    
+    @media (max-width: 768px) {
+      font-size: 2.2rem;
+      margin: 0 0 12px 0;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1.9rem;
+      margin: 0 0 10px 0;
+    }
+  }
+
+  .call-status {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    animation: fadeInOut 1.5s ease-in-out infinite;
+    
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1.1rem;
+    }
+  }
+
+  .call-duration {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+      padding: 6px 14px;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1.2rem;
+      padding: 5px 12px;
+    }
+  }
+}
+
+.audio-visualizer {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 3px;
+  height: 40px;
+  margin-bottom: 40px;
+  
+  @media (max-width: 768px) {
+    height: 35px;
+    margin-bottom: 35px;
+  }
+  
+  @media (max-width: 480px) {
+    height: 30px;
+    margin-bottom: 30px;
+  }
+
+  .wave {
+    width: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    animation: audioWave 1.2s ease-in-out infinite;
+    
+    @media (max-width: 480px) {
+      width: 3px;
+    }
+
+    &.wave-1 {
+      height: 15px;
+      animation-delay: 0s;
+    }
+
+    &.wave-2 {
+      height: 25px;
+      animation-delay: 0.1s;
+    }
+
+    &.wave-3 {
+      height: 35px;
+      animation-delay: 0.2s;
+    }
+
+    &.wave-4 {
+      height: 25px;
+      animation-delay: 0.3s;
+    }
+
+    &.wave-5 {
+      height: 15px;
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+.voice-call-controls {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  
+  @media (max-width: 768px) {
+    gap: 25px;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 20px;
+  }
+}
+
+.control-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  
+  @media (max-width: 768px) {
+    width: 65px;
+    height: 65px;
+    font-size: 1.6rem;
+  }
+  
+  @media (max-width: 480px) {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &.disabled {
+    background: rgba(244, 67, 54, 0.8);
+    
+    &:hover {
+      background: rgba(244, 67, 54, 0.9);
+    }
+  }
+
+  &.end-call {
+    background: rgba(244, 67, 54, 0.8);
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    
+    @media (max-width: 768px) {
+      width: 75px;
+      height: 75px;
+      font-size: 1.8rem;
+    }
+    
+    @media (max-width: 480px) {
+      width: 70px;
+      height: 70px;
+      font-size: 1.7rem;
+    }
+
+    &:hover {
+      background: rgba(244, 67, 54, 0.9);
+      transform: scale(1.05);
+    }
+  }
+}
+
+.voice-call-error {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  .error-content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    color: white;
+    max-width: 500px;
+    width: 100%;
+    backdrop-filter: blur(20px);
+    
+    @media (max-width: 768px) {
+      padding: 30px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 20px;
+    }
+
+    h3 {
+      margin-bottom: 20px;
+      color: #ff6b6b;
+      font-size: 1.8rem;
+      
+      @media (max-width: 480px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+      
+      @media (max-width: 480px) {
+        font-size: 0.9rem;
+      }
+    }
+
+    .permission-help {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      
+      @media (max-width: 480px) {
+        padding: 15px;
+      }
+
+      p {
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      ol {
+        margin: 0;
+        padding-left: 20px;
+        
+        li {
+          margin-bottom: 8px;
+        }
+      }
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      
+      @media (max-width: 480px) {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
+      &.btn-primary {
+        background: #007bff;
+        color: white;
+
+        &:hover {
+          background: #0056b3;
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.2), 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes audioWave {
+  0%, 100% {
+    height: 15px;
+    opacity: 0.5;
+  }
+  50% {
+    height: 35px;
+    opacity: 1;
+  }
+}

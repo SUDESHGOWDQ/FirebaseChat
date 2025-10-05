@@ -1,0 +1,420 @@
+// Modern Color Palette - Unique Design System
+$primary-color: #6366f1; // Modern indigo
+$primary-light: #818cf8;
+$primary-dark: #4f46e5;
+$secondary-color: #ec4899; // Vibrant pink
+$secondary-light: #f472b6;
+$secondary-dark: #db2777;
+$accent-color: #06b6d4; // Cyan accent
+$accent-light: #22d3ee;
+$accent-dark: #0891b2;
+
+// Neutral colors with warm undertones
+$background-color: #fefefe;
+$background-secondary: #f8fafc;
+$background-tertiary: #f1f5f9;
+$surface-color: #ffffff;
+$surface-elevated: rgba(255, 255, 255, 0.8);
+
+// Text colors
+$text-primary: #1e293b;
+$text-secondary: #475569;
+$text-muted: #94a3b8;
+$text-inverse: #ffffff;
+
+// Legacy color variables for compatibility
+$white: #ffffff;
+$black: #1e293b;
+$gray-light: #f8fafc;
+$gray-medium: #94a3b8;
+$gray-dark: #1e293b;
+
+// Semantic colors
+$success-color: #10b981;
+$success-light: #34d399;
+$warning-color: #f59e0b;
+$warning-light: #fbbf24;
+$error-color: #ef4444;
+$error-light: #f87171;
+
+// Chat specific colors
+$message-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+$own-message-bg: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+$online-status: #10b981;
+$away-status: #f59e0b;
+$offline-status: #94a3b8;
+
+// Border and shadows
+$border-color: #e2e8f0;
+$border-light: #f1f5f9;
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Advanced Mixins for Modern Design
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin glassmorphism {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@mixin modern-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    &::before {
+      display: none;
+    }
+  }
+}
+
+@mixin gradient-primary {
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+  box-shadow: $shadow-md;
+}
+
+@mixin gradient-secondary {
+  background: linear-gradient(135deg, $accent-color 0%, $primary-light 100%);
+  box-shadow: $shadow-md;
+}
+
+@mixin modern-card {
+  background: $surface-color;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: $shadow-md;
+  border: 1px solid $border-light;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+@mixin floating-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@mixin pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@mixin slide-in-right {
+  animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@mixin slide-in-left {
+  animation: slideInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Global styles with modern typography and layout
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: linear-gradient(135deg, $background-color 0%, $background-secondary 100%);
+  color: $text-primary;
+  line-height: 1.6;
+  font-size: 14px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+// Enhanced loading styles with modern spinner
+.loading-container {
+  @include flex-center;
+  flex-direction: column;
+  height: 100vh;
+  background: $background-color;
+
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 4px solid $border-color;
+      border-radius: 50%;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 4px solid transparent;
+      border-top: 4px solid $primary-color;
+      border-radius: 50%;
+      animation: modernSpin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    
+    margin-bottom: 24px;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+@keyframes modernSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Modern utility classes
+.btn {
+  @include modern-button;
+  
+  &.btn-primary {
+    @include gradient-primary;
+    color: $text-inverse;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  &.btn-secondary {
+    @include gradient-secondary;
+    color: $text-inverse;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+  }
+  
+  &.btn-outline {
+    background: transparent;
+    border: 2px solid $primary-color;
+    color: $primary-color;
+    
+    &:hover {
+      background: $primary-color;
+      color: $text-inverse;
+      transform: translateY(-2px);
+    }
+  }
+  
+  &.btn-ghost {
+    background: rgba($primary-color, 0.1);
+    color: $primary-color;
+    border: none;
+    
+    &:hover {
+      background: rgba($primary-color, 0.2);
+      transform: translateY(-1px);
+    }
+  }
+  
+  &.btn-sm {
+    padding: 8px 16px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+  
+  &.btn-lg {
+    padding: 16px 32px;
+    font-size: 16px;
+    border-radius: 16px;
+  }
+}
+
+.card {
+  @include modern-card;
+  
+  &.card-glass {
+    @include glassmorphism;
+  }
+  
+  &.card-floating {
+    @include floating-animation;
+  }
+}
+
+// Typography classes
+.text-primary { color: $text-primary; }
+.text-secondary { color: $text-secondary; }
+.text-muted { color: $text-muted; }
+.text-inverse { color: $text-inverse; }
+
+.heading-1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: $text-primary;
+}
+
+.heading-2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: $text-primary;
+}
+
+.heading-3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: $text-primary;
+}
+
+.body-large {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.body-small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.caption {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: $text-muted;
+}
+
+// Spacing utilities
+.m-0 { margin: 0; }
+.m-1 { margin: 8px; }
+.m-2 { margin: 16px; }
+.m-3 { margin: 24px; }
+.m-4 { margin: 32px; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: 8px; }
+.p-2 { padding: 16px; }
+.p-3 { padding: 24px; }
+.p-4 { padding: 32px; }
+
+// Flexbox utilities
+.d-flex { display: flex; }
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.align-center { align-items: center; }
+.flex-1 { flex: 1; }
+
+// Border radius utilities
+.rounded-sm { border-radius: 4px; }
+.rounded { border-radius: 8px; }
+.rounded-lg { border-radius: 12px; }
+.rounded-xl { border-radius: 16px; }
+.rounded-full { border-radius: 50%; }
