@@ -1,0 +1,251 @@
+// Import design system variables and mixins
+@import '../../../App.scss';
+
+// =====================================================
+// RESPONSIVE MODAL COMPONENT
+// =====================================================
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($background-color, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+  @include responsive-padding(16px, 24px, 32px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  // Mobile adjustments
+  @include mobile-only {
+    align-items: flex-end;
+    padding: 0;
+  }
+}
+
+.modal {
+  @include glassmorphism;
+  border-radius: 12px;
+  @include cosmic-glow;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease;
+  
+  @include respond-to('md') {
+    border-radius: 16px;
+  }
+  
+  @include respond-to('lg') {
+    border-radius: 20px;
+  }
+  
+  // Mobile: Full-width bottom sheet style
+  @include mobile-only {
+    width: 100%;
+    max-height: 85vh;
+    border-radius: 16px 16px 0 0;
+    margin: 0;
+    animation: slideUpIn 0.3s ease;
+  }
+
+  // Responsive sizing variants
+  &--small {
+    width: 90%;
+    max-width: 400px;
+    
+    @include mobile-only {
+      width: 100%;
+    }
+    
+    @include respond-to('md') {
+      width: 85%;
+      max-width: 450px;
+    }
+    
+    @include respond-to('lg') {
+      width: 80%;
+      max-width: 500px;
+    }
+  }
+
+  &--medium {
+    width: 90%;
+    max-width: 600px;
+    
+    @include mobile-only {
+      width: 100%;
+    }
+    
+    @include respond-to('md') {
+      width: 85%;
+      max-width: 650px;
+    }
+    
+    @include respond-to('lg') {
+      width: 80%;
+      max-width: 700px;
+    }
+  }
+
+  &--large {
+    width: 90%;
+    max-width: 800px;
+    
+    @include mobile-only {
+      width: 100%;
+    }
+    
+    @include respond-to('md') {
+      width: 90%;
+      max-width: 850px;
+    }
+    
+    @include respond-to('lg') {
+      width: 85%;
+      max-width: 900px;
+    }
+  }
+
+  &--full {
+    width: 95%;
+    max-width: 1200px;
+    height: 90vh;
+    
+    @include mobile-only {
+      width: 100%;
+      height: 85vh;
+    }
+    
+    @include respond-to('lg') {
+      width: 90%;
+      max-width: 1400px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    @include responsive-font-size(20px, 22px, 24px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--text-muted, #6c757d);
+    transition: all 0.2s ease;
+    z-index: 1;
+    
+    @include respond-to('md') {
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+    }
+    
+    @include respond-to('lg') {
+      top: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+    }
+    
+    // Touch-friendly on mobile
+    @include mobile-only {
+      -webkit-tap-highlight-color: transparent;
+      min-width: 36px;
+      min-height: 36px;
+    }
+
+    &:hover {
+      background: var(--surface-hover, #f8f9fa);
+      color: var(--text-color, #212529);
+    }
+  }
+
+  &__header {
+    @include responsive-padding(20px 20px 12px 20px, 24px 24px 16px 24px, 32px 32px 16px 32px);
+    border-bottom: 1px solid var(--border-color, #e9ecef);
+
+    &:last-child {
+      border-bottom: none;
+      @include responsive-padding(20px 20px 20px 20px, 24px 24px 24px 24px, 32px 32px 32px 32px);
+    }
+  }
+
+  &__body {
+    @include responsive-padding(16px 20px, 20px 24px, 24px 32px);
+    flex: 1;
+  }
+
+  &__footer {
+    @include responsive-padding(12px 20px 20px 20px, 16px 24px 24px 24px, 16px 32px 32px 32px);
+    border-top: 1px solid var(--border-color, #e9ecef);
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    
+    @include respond-to('md') {
+      gap: 16px;
+    }
+    
+    // Stack buttons on mobile
+    @include mobile-only {
+      flex-direction: column-reverse;
+      gap: 8px;
+    }
+
+    &:first-child {
+      border-top: none;
+      @include responsive-padding(20px 20px 20px 20px, 24px 24px 24px 24px, 32px 32px 32px 32px);
+    }
+  }
+
+  &__title {
+    margin: 0;
+    @include responsive-font-size(18px, 20px, 24px);
+    font-weight: 600;
+    color: var(--text-color, #212529);
+    @include responsive-padding(0 32px 0 0, 0 36px 0 0, 0 40px 0 0); // Account for close button
+  }
+}
+
+// =====================================================
+// RESPONSIVE MODAL ANIMATIONS
+// =====================================================
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Mobile slide-up animation
+@keyframes slideUpIn {
+  from { 
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

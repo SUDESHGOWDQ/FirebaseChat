@@ -1,6 +1,9 @@
-// Import design system variables
+// Import design system variables and mixins
 @import '../../App.scss';
 
+// =====================================================
+// RESPONSIVE CHAT CONTAINER
+// =====================================================
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -8,45 +11,59 @@
   background: $background-color;
   position: relative;
   overflow: hidden;
+  
+  // Mobile-specific adjustments
+  @include mobile-only {
+    height: 100vh;
+    height: -webkit-fill-available; // iOS Safari fix
+  }
 }
 
-// Loading state
+// =====================================================
+// RESPONSIVE LOADING AND ERROR STATES
+// =====================================================
 .chat-loading {
   @include flex-center;
   height: 100vh;
   flex-direction: column;
   background: $background-color;
+  @include responsive-padding(24px, 32px, 24px);
   
   .loading-spinner {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border: 3px solid $border-color;
     border-top: 3px solid $primary-color;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin-bottom: 16px;
+    @include responsive-margin(0 0 12px 0, 0 0 16px 0, 0 0 16px 0);
+    
+    @include respond-to('md') {
+      width: 40px;
+      height: 40px;
+    }
   }
   
   p {
     color: $text-secondary;
-    font-size: 16px;
+    @include responsive-font-size(14px, 15px, 16px);
     margin: 0;
+    text-align: center;
   }
 }
 
-// Error state
 .chat-error {
   @include flex-center;
   height: 100vh;
   flex-direction: column;
   background: $background-color;
   text-align: center;
-  padding: 24px;
+  @include responsive-padding(24px, 32px, 24px);
   
   h3 {
     color: $text-primary;
-    margin-bottom: 16px;
-    font-size: 24px;
+    @include responsive-margin(0 0 12px 0, 0 0 16px 0, 0 0 16px 0);
+    @include responsive-font-size(20px, 22px, 24px);
     font-weight: 600;
   }
   
@@ -301,9 +318,12 @@
         margin-left: auto;
         margin-right: 0;
         border-radius: 20px 20px 4px 20px;
+        box-shadow: 
+          0 4px 12px rgba($primary-color, 0.3),
+          0 0 20px rgba($accent-color, 0.2);
         
         .message-time {
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(255, 255, 255, 0.9);
         }
       }
     }
@@ -312,11 +332,15 @@
       justify-content: flex-start;
       
       .message-bubble {
-        background: $surface-color;
+        background: rgba($surface-color, 0.1);
         color: $text-primary;
-        border: 1px solid $border-light;
+        border: 1px solid rgba($secondary-color, 0.2);
         border-radius: 20px 20px 20px 4px;
-        box-shadow: $shadow-sm;
+        box-shadow: 
+          $shadow-sm,
+          0 0 10px rgba($secondary-color, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         
         .message-time {
           color: $text-muted;
@@ -352,22 +376,28 @@
 // Input area
 .chat-input {
   padding: 16px 20px;
-  background: $surface-color;
-  border-top: 1px solid $border-color;
+  background: rgba($surface-color, 0.1);
+  border-top: 1px solid rgba($secondary-color, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   
   .input-container {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: $background-tertiary;
+    background: rgba($background-tertiary, 0.8);
     border-radius: 24px;
     padding: 8px 8px 8px 20px;
-    border: 2px solid transparent;
+    border: 2px solid rgba($secondary-color, 0.3);
     transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     
     &:focus-within {
-      border-color: $primary-color;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      border-color: $secondary-color;
+      box-shadow: 
+        0 0 0 3px rgba($secondary-color, 0.2),
+        0 0 20px rgba($secondary-color, 0.3);
     }
     
     input {
@@ -395,14 +425,33 @@
       height: 40px;
       border: none;
       border-radius: 50%;
-      background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+      @include gradient-primary;
       color: $text-inverse;
       cursor: pointer;
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: linear-gradient(45deg, rgba($secondary-color, 0.3), rgba($accent-color, 0.3));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
       
       &:hover:not(:disabled) {
         transform: scale(1.1);
-        box-shadow: $shadow-md;
+        @include cosmic-glow;
+        
+        &::before {
+          opacity: 1;
+        }
       }
       
       &:disabled {
@@ -413,6 +462,8 @@
       
       svg {
         font-size: 16px;
+        position: relative;
+        z-index: 1;
       }
     }
   }

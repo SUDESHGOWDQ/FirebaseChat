@@ -100,7 +100,7 @@ const Register = () => {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h1 className="auth-title">Join ChatApp</h1>
+          <h1 className="auth-title">Join Samachara</h1>
           <p className="auth-subtitle">Create your account to get started</p>
         </div>
 

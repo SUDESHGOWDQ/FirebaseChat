@@ -1,0 +1,437 @@
+// =====================================================
+// RESPONSIVE DESIGN TEST PAGE
+// =====================================================
+// This file demonstrates all responsive components and can be used for testing
+
+.responsive-test-page {
+  min-height: 100vh;
+  background: $background-color;
+  
+  .test-section {
+    @include responsive-padding(20px 16px, 32px 24px, 40px 32px);
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    &:not(:last-child) {
+      border-bottom: 1px solid $border-color;
+    }
+  }
+  
+  .test-title {
+    @extend .heading-2;
+    @include responsive-margin(0 0 16px 0, 0 0 24px 0, 0 0 32px 0);
+    color: $primary-color;
+  }
+  
+  .test-subtitle {
+    @extend .heading-3;
+    @include responsive-margin(24px 0 12px 0, 32px 0 16px 0, 40px 0 20px 0);
+    color: $text-secondary;
+  }
+  
+  .test-description {
+    @extend .body-large;
+    color: $text-muted;
+    @include responsive-margin(0 0 20px 0, 0 0 24px 0, 0 0 28px 0);
+  }
+}
+
+// =====================================================
+// RESPONSIVE GRID EXAMPLES
+// =====================================================
+.grid-examples {
+  .example-grid {
+    display: grid;
+    gap: 16px;
+    @include responsive-margin(0 0 24px 0, 0 0 32px 0, 0 0 40px 0);
+    
+    @include respond-to('md') {
+      gap: 20px;
+    }
+    
+    @include respond-to('lg') {
+      gap: 24px;
+    }
+    
+    &.cols-1 { grid-template-columns: 1fr; }
+    
+    &.cols-2 { 
+      grid-template-columns: 1fr;
+      
+      @include respond-to('sm') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    &.cols-3 { 
+      grid-template-columns: 1fr;
+      
+      @include respond-to('md') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @include respond-to('lg') {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    &.cols-4 { 
+      grid-template-columns: 1fr;
+      
+      @include respond-to('sm') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      @include respond-to('lg') {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
+  
+  .grid-item {
+    background: $surface-color;
+    @include responsive-padding(16px, 20px, 24px);
+    border-radius: 8px;
+    border: 1px solid $border-color;
+    text-align: center;
+    
+    @include respond-to('md') {
+      border-radius: 12px;
+    }
+    
+    .item-number {
+      @include responsive-font-size(14px, 16px, 18px);
+      font-weight: 600;
+      color: $primary-color;
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE BUTTON EXAMPLES
+// =====================================================
+.button-examples {
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    @include responsive-margin(0 0 24px 0, 0 0 32px 0, 0 0 40px 0);
+    
+    @include respond-to('md') {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .btn-example {
+      @include modern-button;
+      
+      &.primary {
+        @include gradient-primary;
+        color: $text-inverse;
+      }
+      
+      &.secondary {
+        @include gradient-secondary;
+        color: $text-inverse;
+      }
+      
+      &.outline {
+        background: transparent;
+        border: 2px solid $primary-color;
+        color: $primary-color;
+        
+        &:hover {
+          background: $primary-color;
+          color: $text-inverse;
+        }
+      }
+      
+      &.small {
+        @include responsive-padding(8px 16px, 10px 18px, 12px 20px);
+        @include responsive-font-size(12px, 13px, 14px);
+        min-height: 36px;
+        
+        @include respond-to('md') {
+          min-height: auto;
+        }
+      }
+      
+      &.large {
+        @include responsive-padding(16px 24px, 18px 28px, 20px 32px);
+        @include responsive-font-size(16px, 17px, 18px);
+        min-height: 56px;
+        
+        @include respond-to('md') {
+          min-height: auto;
+        }
+      }
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE FORM EXAMPLES
+// =====================================================
+.form-examples {
+  .form-example {
+    @include modern-card;
+    @include responsive-margin(0 0 24px 0, 0 0 32px 0, 0 0 40px 0);
+    
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      @include responsive-margin(0 0 20px 0, 0 0 24px 0, 0 0 24px 0);
+      
+      @include respond-to('md') {
+        flex-direction: row;
+        gap: 20px;
+      }
+      
+      .form-col {
+        flex: 1;
+      }
+    }
+    
+    .form-group {
+      @include responsive-margin(0 0 16px 0, 0 0 20px 0, 0 0 24px 0);
+      
+      label {
+        display: block;
+        @include responsive-margin(0 0 6px 0, 0 0 8px 0, 0 0 8px 0);
+        font-weight: 600;
+        color: $text-primary;
+        @include responsive-font-size(13px, 14px, 14px);
+      }
+      
+      input {
+        width: 100%;
+        @include responsive-padding(12px 16px, 14px 18px, 16px 20px);
+        border: 2px solid $border-color;
+        border-radius: 8px;
+        @include responsive-font-size(15px, 16px, 16px);
+        background: $surface-color;
+        color: $text-primary;
+        transition: all 0.3s ease;
+        min-height: 44px;
+        
+        @include respond-to('md') {
+          border-radius: 12px;
+          min-height: auto;
+        }
+        
+        @include mobile-only {
+          font-size: 16px; // Prevent zoom on iOS
+        }
+        
+        &:focus {
+          border-color: $primary-color;
+          box-shadow: 0 0 0 4px rgba($primary-color, 0.1);
+          outline: none;
+        }
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+        
+        @include respond-to('md') {
+          min-height: 120px;
+        }
+      }
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE CARD EXAMPLES
+// =====================================================
+.card-examples {
+  .cards-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+    
+    @include respond-to('md') {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    
+    @include respond-to('lg') {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+  
+  .card-example {
+    @include modern-card;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-lg;
+      
+      @include mobile-only {
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
+      }
+    }
+    
+    .card-header {
+      @include responsive-padding(0 0 12px 0, 0 0 16px 0, 0 0 16px 0);
+      @include responsive-margin(0 0 12px 0, 0 0 16px 0, 0 0 16px 0);
+      border-bottom: 1px solid $border-color;
+      
+      h3 {
+        @include responsive-font-size(16px, 18px, 20px);
+        font-weight: 600;
+        color: $text-primary;
+        margin: 0;
+      }
+    }
+    
+    .card-body {
+      @include responsive-font-size(14px, 15px, 16px);
+      color: $text-secondary;
+      line-height: 1.6;
+    }
+    
+    .card-footer {
+      @include responsive-padding(12px 0 0 0, 16px 0 0 0, 16px 0 0 0);
+      @include responsive-margin(12px 0 0 0, 16px 0 0 0, 16px 0 0 0);
+      border-top: 1px solid $border-color;
+      
+      .card-actions {
+        display: flex;
+        gap: 8px;
+        
+        @include mobile-only {
+          flex-direction: column;
+        }
+        
+        @include respond-to('md') {
+          gap: 12px;
+          flex-direction: row;
+        }
+      }
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE TYPOGRAPHY EXAMPLES
+// =====================================================
+.typography-examples {
+  .typography-showcase {
+    @include responsive-margin(0 0 32px 0, 0 0 40px 0, 0 0 48px 0);
+    
+    .text-example {
+      @include responsive-margin(0 0 16px 0, 0 0 20px 0, 0 0 24px 0);
+      
+      .label {
+        @include responsive-font-size(12px, 13px, 14px);
+        color: $text-muted;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        @include responsive-margin(0 0 4px 0, 0 0 6px 0, 0 0 8px 0);
+      }
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE SPACING EXAMPLES
+// =====================================================
+.spacing-examples {
+  .spacing-showcase {
+    .spacing-item {
+      background: rgba($primary-color, 0.1);
+      border: 1px dashed $primary-color;
+      border-radius: 4px;
+      text-align: center;
+      @include responsive-font-size(12px, 13px, 14px);
+      color: $primary-color;
+      font-weight: 500;
+    }
+    
+    .p-1 { @include responsive-padding(4px, 6px, 8px); }
+    .p-2 { @include responsive-padding(8px, 12px, 16px); }
+    .p-3 { @include responsive-padding(16px, 20px, 24px); }
+    .p-4 { @include responsive-padding(24px, 28px, 32px); }
+    
+    .m-1 { @include responsive-margin(4px, 6px, 8px); }
+    .m-2 { @include responsive-margin(8px, 12px, 16px); }
+    .m-3 { @include responsive-margin(16px, 20px, 24px); }
+    .m-4 { @include responsive-margin(24px, 28px, 32px); }
+  }
+}
+
+// =====================================================
+// RESPONSIVE LAYOUT EXAMPLES
+// =====================================================
+.layout-examples {
+  .layout-example {
+    @include modern-card;
+    @include responsive-margin(0 0 24px 0, 0 0 32px 0, 0 0 40px 0);
+    
+    .layout-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      
+      @include respond-to('md') {
+        flex-direction: row;
+        gap: 20px;
+      }
+      
+      @include respond-to('lg') {
+        gap: 24px;
+      }
+      
+      .sidebar {
+        background: rgba($secondary-color, 0.1);
+        @include responsive-padding(16px, 20px, 24px);
+        border-radius: 8px;
+        
+        @include respond-to('md') {
+          width: 250px;
+          flex: none;
+        }
+        
+        @include respond-to('lg') {
+          width: 280px;
+        }
+      }
+      
+      .main-content {
+        flex: 1;
+        background: rgba($accent-color, 0.1);
+        @include responsive-padding(16px, 20px, 24px);
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+// =====================================================
+// MOBILE-SPECIFIC STYLES
+// =====================================================
+@include mobile-only {
+  .mobile-only-notice {
+    display: block;
+    background: rgba($warning-color, 0.1);
+    border: 1px solid $warning-color;
+    color: darken($warning-color, 20%);
+    @include responsive-padding(12px, 16px, 16px);
+    border-radius: 8px;
+    @include responsive-margin(0 0 20px 0, 0 0 24px 0, 0 0 24px 0);
+    @include responsive-font-size(14px, 15px, 16px);
+    
+    &::before {
+      content: '📱 ';
+      margin-right: 8px;
+    }
+  }
+}

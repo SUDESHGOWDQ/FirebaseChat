@@ -1,0 +1,406 @@
+// =====================================================
+// RESPONSIVE UTILITIES - MOBILE, TABLET, DESKTOP
+// =====================================================
+
+// Import main design system
+@import '../App.scss';
+
+// =====================================================
+// CONTAINER UTILITIES
+// =====================================================
+.container {
+  width: 100%;
+  margin: 0 auto;
+  @include responsive-padding(0 16px, 0 20px, 0 24px);
+  
+  &.container-sm {
+    max-width: 640px;
+  }
+  
+  &.container-md {
+    max-width: 768px;
+  }
+  
+  &.container-lg {
+    max-width: 1024px;
+  }
+  
+  &.container-xl {
+    max-width: 1280px;
+  }
+  
+  &.container-2xl {
+    max-width: 1536px;
+  }
+}
+
+// =====================================================
+// RESPONSIVE GRID SYSTEM
+// =====================================================
+.grid {
+  display: grid;
+  gap: 16px;
+  
+  @include respond-to('md') {
+    gap: 20px;
+  }
+  
+  @include respond-to('lg') {
+    gap: 24px;
+  }
+  
+  // Grid columns
+  &.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  &.grid-cols-2 { 
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    
+    @include respond-to('sm') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  &.grid-cols-3 { 
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    
+    @include respond-to('md') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    @include respond-to('lg') {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  &.grid-cols-4 { 
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    
+    @include respond-to('sm') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    
+    @include respond-to('lg') {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE FLEX LAYOUTS
+// =====================================================
+.flex-responsive {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  @include respond-to('md') {
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  @include respond-to('lg') {
+    gap: 24px;
+  }
+}
+
+.flex-stack-mobile {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  
+  @include mobile-only {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+// =====================================================
+// RESPONSIVE BUTTONS
+// =====================================================
+.btn-responsive {
+  @include modern-button;
+  
+  // Full width on mobile
+  @include mobile-only {
+    width: 100%;
+  }
+  
+  // Responsive sizing
+  &.btn-sm {
+    @include responsive-padding(8px 14px, 8px 16px, 8px 16px);
+    @include responsive-font-size(12px, 12px, 12px);
+    border-radius: 8px;
+    min-height: 36px;
+    
+    @include respond-to('md') {
+      min-height: auto;
+    }
+  }
+  
+  &.btn-lg {
+    @include responsive-padding(16px 24px, 18px 28px, 20px 32px);
+    @include responsive-font-size(16px, 17px, 18px);
+    border-radius: 14px;
+    min-height: 52px;
+    
+    @include respond-to('md') {
+      border-radius: 18px;
+      min-height: auto;
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE CARDS
+// =====================================================
+.card-responsive {
+  @include modern-card;
+  
+  // Responsive spacing
+  &.card-sm {
+    @include responsive-padding(12px, 16px, 16px);
+    border-radius: 8px;
+    
+    @include respond-to('md') {
+      border-radius: 12px;
+    }
+  }
+  
+  &.card-lg {
+    @include responsive-padding(20px, 28px, 32px);
+    border-radius: 16px;
+    
+    @include respond-to('md') {
+      border-radius: 20px;
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE FORMS
+// =====================================================
+.form-responsive {
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+    @include respond-to('md') {
+      flex-direction: row;
+      gap: 20px;
+    }
+    
+    .form-col {
+      flex: 1;
+    }
+    
+    .form-col-auto {
+      flex: none;
+    }
+  }
+  
+  .form-group-responsive {
+    margin-bottom: 16px;
+    
+    @include respond-to('md') {
+      margin-bottom: 20px;
+    }
+    
+    @include respond-to('lg') {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE MODALS AND OVERLAYS
+// =====================================================
+.modal-responsive {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  @include flex-center;
+  z-index: 1000;
+  @include responsive-padding(16px, 24px, 24px);
+  
+  .modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    @include responsive-padding(20px, 24px, 32px);
+    
+    @include respond-to('md') {
+      border-radius: 16px;
+      max-width: 600px;
+    }
+    
+    @include respond-to('lg') {
+      border-radius: 20px;
+      max-width: 700px;
+    }
+    
+    // Mobile adjustments
+    @include mobile-only {
+      max-height: 95vh;
+      margin: 8px 0;
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE SIDEBAR/NAVIGATION
+// =====================================================
+.sidebar-responsive {
+  background: white;
+  border-right: 1px solid $border-color;
+  transition: transform 0.3s ease;
+  
+  // Mobile: Overlay sidebar
+  @include mobile-only {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 999;
+    transform: translateX(-100%);
+    box-shadow: $shadow-lg;
+    
+    &.sidebar-open {
+      transform: translateX(0);
+    }
+  }
+  
+  // Tablet and up: Static sidebar
+  @include respond-to('md') {
+    position: static;
+    width: 250px;
+    transform: none;
+  }
+  
+  @include respond-to('lg') {
+    width: 280px;
+  }
+}
+
+// Sidebar overlay for mobile
+.sidebar-overlay {
+  display: none;
+  
+  @include mobile-only {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    
+    &.overlay-active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+// =====================================================
+// RESPONSIVE TYPOGRAPHY HELPERS
+// =====================================================
+.text-responsive {
+  &.text-xs {
+    @include responsive-font-size(10px, 11px, 12px);
+  }
+  
+  &.text-sm {
+    @include responsive-font-size(12px, 13px, 14px);
+  }
+  
+  &.text-base {
+    @include responsive-font-size(14px, 15px, 16px);
+  }
+  
+  &.text-lg {
+    @include responsive-font-size(16px, 17px, 18px);
+  }
+  
+  &.text-xl {
+    @include responsive-font-size(18px, 19px, 20px);
+  }
+  
+  &.text-2xl {
+    @include responsive-font-size(22px, 24px, 24px);
+  }
+  
+  &.text-3xl {
+    @include responsive-font-size(26px, 28px, 30px);
+  }
+}
+
+// =====================================================
+// RESPONSIVE SPACING HELPERS
+// =====================================================
+.space-y-responsive {
+  > * + * {
+    @include responsive-margin(12px 0 0 0, 16px 0 0 0, 20px 0 0 0);
+  }
+}
+
+.space-x-responsive {
+  display: flex;
+  
+  > * + * {
+    @include responsive-margin(0 0 0 12px, 0 0 0 16px, 0 0 0 20px);
+  }
+}
+
+// =====================================================
+// RESPONSIVE VISIBILITY UTILITIES
+// =====================================================
+.show-mobile {
+  display: block;
+  
+  @include respond-to('md') {
+    display: none;
+  }
+}
+
+.show-tablet {
+  display: none;
+  
+  @include tablet-only {
+    display: block;
+  }
+}
+
+.show-desktop {
+  display: none;
+  
+  @include desktop-up {
+    display: block;
+  }
+}
+
+.hide-mobile {
+  @include mobile-only {
+    display: none !important;
+  }
+}
+
+.hide-tablet {
+  @include tablet-only {
+    display: none !important;
+  }
+}
+
+.hide-desktop {
+  @include desktop-up {
+    display: none !important;
+  }
+}

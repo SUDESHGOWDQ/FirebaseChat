@@ -1,0 +1,122 @@
+// Import design system variables and mixins
+@import '../../../App.scss';
+
+// =====================================================
+// RESPONSIVE CARD COMPONENT
+// =====================================================
+.card {
+  @include glassmorphism;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  
+  @include respond-to('md') {
+    border-radius: 16px;
+  }
+
+  // Responsive padding variants
+  &--small {
+    @include responsive-padding(12px, 16px, 16px);
+  }
+
+  &--medium {
+    @include responsive-padding(16px, 20px, 24px);
+  }
+
+  &--large {
+    @include responsive-padding(20px, 28px, 32px);
+  }
+
+  &--hover {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      @include cosmic-glow;
+      filter: brightness(1.05);
+      
+      // Reduce hover effects on mobile for better performance
+      @include mobile-only {
+        transform: translateY(-1px);
+        filter: none;
+      }
+    }
+    
+    // Touch improvements on mobile
+    @include mobile-only {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+
+  &__header {
+    border-bottom: 1px solid var(--border-color, #e9ecef);
+    @include responsive-padding(0 0 12px 0, 0 0 16px 0, 0 0 16px 0);
+    @include responsive-margin(0 0 12px 0, 0 0 16px 0, 0 0 16px 0);
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    
+    // Better text spacing on mobile
+    @include mobile-only {
+      line-height: 1.5;
+    }
+  }
+
+  &__footer {
+    border-top: 1px solid var(--border-color, #e9ecef);
+    @include responsive-padding(12px 0 0 0, 16px 0 0 0, 16px 0 0 0);
+    @include responsive-margin(12px 0 0 0, 16px 0 0 0, 16px 0 0 0);
+
+    &:first-child {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  &__title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color, #212529);
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-muted, #6c757d);
+  }
+}
+
+// Special card variants
+.card--chat {
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--surface-hover, #f8f9fa);
+  }
+
+  &--active {
+    background: var(--primary-light, #e3f2fd);
+    border-color: var(--primary-color, #007bff);
+  }
+}
+
+.card--user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+
+  &:hover {
+    background: var(--surface-hover, #f8f9fa);
+  }
+}

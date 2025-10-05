@@ -1,0 +1,119 @@
+.incoming-call-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.incoming-call {
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__avatar {
+    animation: pulse 2s infinite;
+  }
+
+  &__info {
+    text-align: center;
+  }
+
+  &__name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-color, #212529);
+  }
+
+  &__type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0;
+    color: var(--text-muted, #6c757d);
+    font-size: 1rem;
+  }
+
+  &__icon {
+    font-size: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  &__btn {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &--decline {
+      background: var(--danger-color, #dc3545);
+      color: white;
+
+      &:hover {
+        background: var(--danger-dark, #c82333);
+        transform: scale(1.05);
+      }
+    }
+
+    &--accept {
+      background: var(--success-color, #28a745);
+      color: white;
+
+      &:hover {
+        background: var(--success-dark, #1e7e34);
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
